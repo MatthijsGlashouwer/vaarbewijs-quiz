@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vaarbewijs Quiz App
 
-## Getting Started
+Een interactieve quiz-applicatie voor het oefenen van het Klein Vaarbewijs 1 examen.
 
-First, run the development server:
+## Functies
+
+- Interactieve quiz met 25 vragen
+- Timer die de 45 minuten examenduur simuleert
+- Voortgangsindicator om te zien hoeveel vragen al beantwoord zijn
+- Gedetailleerde resultaten per categorie
+- Mogelijkheid om antwoorden te bekijken en te leren van fouten
+- Responsive design voor desktop en mobiel gebruik
+
+## Technologie
+
+Deze applicatie is gebouwd met:
+
+- [Next.js 15](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Statisch getypeerde JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+
+## Lokaal starten
+
+Om de applicatie lokaal te draaien:
 
 ```bash
+# Installeer dependencies
+npm install
+# of
+yarn install
+# of
+bun install
+
+# Start de ontwikkelserver
 npm run dev
-# or
+# of 
 yarn dev
-# or
-pnpm dev
-# or
+# of
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in je browser om de applicatie te zien.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployen naar Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+De eenvoudigste manier om deze app te deployen is met [Vercel](https://vercel.com), het platform van de makers van Next.js.
 
-## Learn More
+1. Push je code naar een Git repository (GitHub, GitLab, BitBucket)
+2. Importeer het project in Vercel: [https://vercel.com/new](https://vercel.com/new)
+3. Vercel detecteert automatisch dat het een Next.js app is en stelt de juiste configuratie in
+4. Klik op "Deploy" en je app is live!
 
-To learn more about Next.js, take a look at the following resources:
+## Doorontwikkelen
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ideeën voor uitbreidingen:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Meerdere examens toevoegen
+- Optie voor Klein Vaarbewijs 2 vragen
+- Voortgang opslaan (met localStorage)
+- Examenmode vs. oefenmode
+- Afbeeldingen toevoegen bij relevante vragen
 
-## Deploy on Vercel
+## Licentie
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dit project is open-source software.
