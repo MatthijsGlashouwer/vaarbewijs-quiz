@@ -7,7 +7,7 @@ import Results from './Results';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Clock, AlertCircle, ArrowLeft, ArrowRight, Trash2, CheckCircle, ListChecks } from 'lucide-react';
+import { Clock, ArrowLeft, ArrowRight, Trash2, CheckCircle, ListChecks } from 'lucide-react';
 
 interface QuizProps {
   questions: QuestionType[];
