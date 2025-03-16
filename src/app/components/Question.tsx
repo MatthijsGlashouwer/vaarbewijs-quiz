@@ -17,7 +17,7 @@ interface AnimationConfig {
 }
 
 // Define animation mappings based on image content
-const getAnimationConfig = (src: string, category: string): AnimationConfig => {
+const getAnimationConfig = (src: string, _category: string): AnimationConfig => {
   if (src.includes('blauw-bord')) {
     return { type: 'signal-flash', duration: 1.5, loop: true };
   } else if (src.includes('hoofdvaarweg')) {
