@@ -9,12 +9,88 @@ interface QuizProps {
   questions: QuestionType[];
 }
 
+// Define a storage key for localStorage
+const STORAGE_KEY = 'vaarbewijs_quiz_progress';
+
+// Define the data structure for what we'll store in localStorage
+interface StoredProgress {
+  userAnswers: Record<number, string>;
+  remainingTime: number;
+  currentQuestionIndex: number;
+  quizState: 'quiz' | 'results' | 'review';
+  lastUpdated: number; // Timestamp to track when the progress was last saved
+}
+
 export default function Quiz({ questions }: QuizProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
   const [quizState, setQuizState] = useState<'quiz' | 'results' | 'review'>('quiz');
   const [timer, setTimer] = useState<number>(45 * 60); // 45 minutes in seconds
+  const [hasStoredProgress, setHasStoredProgress] = useState(false);
   
+  // Load stored progress when the component mounts
+  useEffect(() => {
+    const loadProgress = () => {
+      try {
+        const storedData = localStorage.getItem(STORAGE_KEY);
+        if (storedData) {
+          const progress: StoredProgress = JSON.parse(storedData);
+          
+          // Check if stored data is from the same set of questions (simple check)
+          const validProgress = questions.length > 0 && 
+            Object.keys(progress.userAnswers).every(
+              key => questions.some(q => q.id === parseInt(key))
+            );
+          
+          if (validProgress) {
+            setUserAnswers(progress.userAnswers);
+            setCurrentQuestionIndex(progress.currentQuestionIndex);
+            setQuizState(progress.quizState);
+            setTimer(progress.remainingTime);
+            setHasStoredProgress(true);
+            return true;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading progress:', error);
+      }
+      return false;
+    };
+
+    loadProgress();
+  }, [questions]);
+  
+  // Save progress effect
+  useEffect(() => {
+    const saveProgress = () => {
+      // Don't save if the quiz is complete
+      if (quizState === 'results' && 
+          Object.keys(userAnswers).length === questions.length) {
+        return;
+      }
+      
+      const progress: StoredProgress = {
+        userAnswers,
+        remainingTime: timer,
+        currentQuestionIndex,
+        quizState,
+        lastUpdated: Date.now(),
+      };
+      
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    };
+    
+    // Save whenever state changes
+    saveProgress();
+    
+    // Also save on window unload
+    window.addEventListener('beforeunload', saveProgress);
+    return () => {
+      window.removeEventListener('beforeunload', saveProgress);
+    };
+  }, [userAnswers, timer, currentQuestionIndex, quizState, questions.length]);
+  
+  // Timer effect
   useEffect(() => {
     if (quizState !== 'quiz' || timer <= 0) return;
     
@@ -57,10 +133,19 @@ export default function Quiz({ questions }: QuizProps) {
   };
   
   const restartQuiz = () => {
+    // Clear localStorage on restart
+    localStorage.removeItem(STORAGE_KEY);
     setUserAnswers({});
     setCurrentQuestionIndex(0);
     setQuizState('quiz');
     setTimer(45 * 60); // Reset timer to 45 minutes
+    setHasStoredProgress(false);
+  };
+  
+  const clearProgress = () => {
+    if (window.confirm('Weet je zeker dat je je voortgang wilt wissen? Dit kan niet ongedaan gemaakt worden.')) {
+      restartQuiz();
+    }
   };
   
   const reviewAnswers = () => {
@@ -78,6 +163,34 @@ export default function Quiz({ questions }: QuizProps) {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
   const isFirstQuestion = currentQuestionIndex === 0;
   const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const answeredQuestionsCount = Object.keys(userAnswers).length;
+
+  // Show the resume prompt if there's saved progress
+  if (hasStoredProgress && quizState === 'quiz' && answeredQuestionsCount > 0) {
+    return (
+      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md my-12">
+        <h2 className="text-xl font-bold mb-4">Voortgang gevonden</h2>
+        <p className="mb-4">
+          Je hebt een eerdere quiz-sessie met {answeredQuestionsCount} beantwoorde vragen. 
+          Wil je verdergaan waar je gebleven was?
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={() => setHasStoredProgress(false)}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+          >
+            Doorgaan
+          </button>
+          <button
+            onClick={restartQuiz}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 rounded-md font-medium transition-colors"
+          >
+            Nieuwe quiz starten
+          </button>
+        </div>
+      </div>
+    );
+  }
   
   if (quizState === 'results') {
     return (
@@ -101,7 +214,7 @@ export default function Quiz({ questions }: QuizProps) {
         </div>
         
         <div className="flex items-center mt-4 sm:mt-0">
-          <div className={`mr-2 text-lg font-medium ${timer < 300 ? 'text-red-600 animate-pulse' : 'text-gray-800'}`}>
+          <div className={`mr-2 text-lg font-medium quiz-timer ${timer < 300 ? 'text-red-600 animate-pulse' : 'text-gray-800'}`}>
             {formatTime(timer)}
           </div>
           {quizState === 'quiz' && (
@@ -148,6 +261,13 @@ export default function Quiz({ questions }: QuizProps) {
           }`}
         >
           Vorige
+        </button>
+        
+        <button
+          onClick={clearProgress}
+          className="px-6 py-2 rounded-md font-medium text-red-600 hover:bg-red-50 border border-red-200"
+        >
+          Voortgang wissen
         </button>
         
         <button

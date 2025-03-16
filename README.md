@@ -7,6 +7,7 @@ Een interactieve quiz-applicatie voor het oefenen van het Klein Vaarbewijs 1 exa
 - Interactieve quiz met 25 vragen
 - Visuele illustraties bij relevante vragen om begrip te verbeteren
 - Timer die de 45 minuten examenduur simuleert
+- Automatisch opslaan van voortgang (je kunt de quiz later hervatten)
 - Voortgangsindicator om te zien hoeveel vragen al beantwoord zijn
 - Gedetailleerde resultaten per categorie
 - Mogelijkheid om antwoorden te bekijken en te leren van fouten
@@ -20,6 +21,7 @@ Deze applicatie is gebouwd met:
 - [TypeScript](https://www.typescriptlang.org/) - Statisch getypeerde JavaScript
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - SVG illustraties voor verbeterde visuele uitleg
+- LocalStorage API voor het bewaren van voortgang
 
 ## Lokaal starten
 
@@ -42,6 +44,18 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in je browser om de applicatie te zien.
+
+## Voortgang opslaan
+
+De app slaat automatisch je voortgang op in de browser's localStorage. Dit betekent dat:
+
+- Je kunt de browser sluiten en later terugkomen om verder te gaan
+- Je voortgang bewaard blijft zelfs als de pagina wordt vernieuwd
+- Je quiz-antwoorden, timer en huidige vraag worden onthouden
+- Je kunt kiezen of je een nieuwe quiz wilt starten of doorgaan met je vorige sessie
+- Er een optie is om je voortgang handmatig te wissen
+
+Je voortgang wordt alleen opgeslagen op het apparaat dat je gebruikt. Als je een ander apparaat of browser gebruikt, begin je met een nieuwe quiz.
 
 ## Afbeeldingen toevoegen
 
@@ -76,9 +90,9 @@ De eenvoudigste manier om deze app te deployen is met [Vercel](https://vercel.co
 Ideeën voor uitbreidingen:
 
 - ✅ Afbeeldingen toevoegen bij relevante vragen
+- ✅ Voortgang opslaan (met localStorage)
 - Meerdere examens toevoegen
 - Optie voor Klein Vaarbewijs 2 vragen
-- Voortgang opslaan (met localStorage)
 - Examenmode vs. oefenmode
 - Animaties toevoegen voor betere visualisaties
 
