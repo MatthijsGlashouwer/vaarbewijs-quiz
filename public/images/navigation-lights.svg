@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Night sky background -->
+  <rect x="0" y="0" width="500" height="400" fill="#0D1321"/>
+  
+  <!-- Water with slight reflection -->
+  <rect class="water" x="0" y="250" width="500" height="150" fill="#1D2D44" opacity="0.8"/>
+  
+  <!-- Vessels with navigation lights -->
+  
+  <!-- First vessel (motorboat) -->
+  <g class="vessel" id="motorboat">
+    <rect x="100" y="270" width="80" height="30" fill="#3E5C76" rx="5"/>
+    <rect x="110" y="250" width="60" height="20" fill="#3E5C76" rx="5"/>
+    
+    <!-- Port light (red) -->
+    <circle cx="110" cy="270" r="5" fill="#F44336" class="light" id="port-light"/>
+    
+    <!-- Starboard light (green) -->
+    <circle cx="170" cy="270" r="5" fill="#4CAF50" class="light" id="starboard-light"/>
+    
+    <!-- Masthead light (white) -->
+    <circle cx="140" cy="245" r="5" fill="#FFFFFF" class="light" id="masthead-light"/>
+  </g>
+  
+  <!-- Second vessel (sailing vessel) -->
+  <g class="vessel" id="sailboat">
+    <rect x="320" y="280" width="60" height="25" fill="#1D3557" rx="5"/>
+    <polygon points="350,220 350,280 370,280" fill="#748CAB"/>
+    
+    <!-- Port light (red) -->
+    <circle cx="330" cy="280" r="5" fill="#F44336" class="light" id="sail-port-light"/>
+    
+    <!-- Starboard light (green) -->
+    <circle cx="370" cy="280" r="5" fill="#4CAF50" class="light" id="sail-starboard-light"/>
+    
+    <!-- Masthead light (white, only for motor-powered sailing vessels) -->
+    <circle cx="350" cy="260" r="4" fill="#FFFFFF" class="light" id="sail-motor-light" opacity="0.3"/>
+  </g>
+  
+  <!-- Legend -->
+  <g id="legend" transform="translate(20, 20)">
+    <text x="0" y="15" font-family="Arial" font-size="14" fill="#FFFFFF">Navigatieverlichting</text>
+    
+    <circle cx="10" cy="40" r="5" fill="#F44336"/>
+    <text x="20" y="44" font-family="Arial" font-size="12" fill="#FFFFFF">Bakboord (rood)</text>
+    
+    <circle cx="10" cy="60" r="5" fill="#4CAF50"/>
+    <text x="20" y="64" font-family="Arial" font-size="12" fill="#FFFFFF">Stuurboord (groen)</text>
+    
+    <circle cx="10" cy="80" r="5" fill="#FFFFFF"/>
+    <text x="20" y="84" font-family="Arial" font-size="12" fill="#FFFFFF">Toplicht (wit)</text>
+    
+    <text x="0" y="110" font-family="Arial" font-size="12" fill="#F0F0F0">Motorboot</text>
+    <text x="0" y="125" font-family="Arial" font-size="10" fill="#DDDDDD">- Zichtbaar van meerdere kanten</text>
+    
+    <text x="0" y="150" font-family="Arial" font-size="12" fill="#F0F0F0">Zeilboot</text>
+    <text x="0" y="165" font-family="Arial" font-size="10" fill="#DDDDDD">- Zichtbaar aan bakboord of stuurboord</text>
+    
+    <circle cx="300" cy="80" r="2" fill="#FFFFFF" class="star"/>
+    <circle cx="320" cy="60" r="2" fill="#FFFFFF" class="star"/>
+    <circle cx="350" cy="40" r="2" fill="#FFFFFF" class="star"/>
+    <circle cx="380" cy="30" r="2" fill="#FFFFFF" class="star"/>
+    <circle cx="410" cy="50" r="2" fill="#FFFFFF" class="star"/>
+    <circle cx="440" cy="70" r="2" fill="#FFFFFF" class="star"/>
+  </g>
+  
+  <!-- Reflection on water -->
+  <path d="M110,320 V330" stroke="#F44336" stroke-width="1" opacity="0.3"/>
+  <path d="M170,320 V330" stroke="#4CAF50" stroke-width="1" opacity="0.3"/>
+  <path d="M140,320 V335" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
+  
+  <path d="M330,320 V330" stroke="#F44336" stroke-width="1" opacity="0.3"/>
+  <path d="M370,320 V330" stroke="#4CAF50" stroke-width="1" opacity="0.3"/>
+</svg> 

@@ -379,5 +379,56 @@ export const questions: Question[] = [
     correctOptionId: "c",
     explanation: "Bij vastlopen: eerst omgeving peilen en rustig bepalen wat de beste actie is.",
     category: "Praktijksituaties"
+  },
+  {
+    id: 26,
+    text: "Welke voorrangsregel geldt bij deze kruising van vaarwegen?",
+    options: [
+      { id: "a", text: "Het blauwe schip heeft voorrang omdat het van rechts komt" },
+      { id: "b", text: "Het oranje schip heeft voorrang omdat het van links komt" },
+      { id: "c", text: "Er geldt geen voorrangsregel, schepen moeten elkaar ruimte geven" },
+      { id: "d", text: "Het schip dat het snelst vaart heeft voorrang" }
+    ],
+    correctOptionId: "c",
+    explanation: "Bij een gelijkwaardige kruising van vaarwegen geldt dat alle schepen aan stuurboord (rechts) voorrang moeten verlenen. In deze situatie moeten beide schepen hun koers en snelheid aanpassen om een veilige passage mogelijk te maken.",
+    category: "Navigatie en Vaarregels",
+    image: {
+      src: "/images/animated-vessel-crossing.svg",
+      alt: "Animatie van twee schepen die elkaar kruisen op een vaarweg",
+      width: 500,
+      height: 400
+    }
+  },
+  {
+    id: 27,
+    text: "Welke navigatieverlichting is verplicht voor een motorboot 's nachts?",
+    options: [
+      { id: "a", text: "Alleen boordlichten (rood en groen)" },
+      { id: "b", text: "Alleen een wit toplicht" },
+      { id: "c", text: "Boordlichten én toplicht" },
+      { id: "d", text: "Boordlichten, toplicht en een extra heklicht" }
+    ],
+    correctOptionId: "c",
+    explanation: "Een motorboot moet 's nachts volgens het BPR voorzien zijn van boordlichten (rood aan bakboord, groen aan stuurboord) en een wit toplicht. Een heklicht is alleen verplicht voor schepen langer dan 7 meter.",
+    category: "Navigatie en Vaarregels",
+    image: {
+      src: "/images/navigation-lights.svg",
+      alt: "Animatie van navigatieverlichting op verschillende scheepstypen",
+      width: 500,
+      height: 400
+    }
+  },
+  {
+    id: 28,
+    text: "Wat is het maximaal toegestane alcoholpromillage voor een schipper op binnenwateren?",
+    options: [
+      { id: "a", text: "0,2 promille" },
+      { id: "b", text: "0,5 promille" },
+      { id: "c", text: "0,8 promille" },
+      { id: "d", text: "1,0 promille" }
+    ],
+    correctOptionId: "b",
+    explanation: "Het maximaal toegestane alcoholpromillage voor een schipper op binnenwateren is 0,5 promille, hetzelfde als voor bestuurders in het wegverkeer.",
+    category: "Wet- en Regelgeving"
   }
 ]; 

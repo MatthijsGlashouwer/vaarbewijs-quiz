@@ -6,6 +6,7 @@ Een interactieve quiz-applicatie voor het oefenen van het Klein Vaarbewijs 1 exa
 
 - Interactieve quiz met 25 vragen
 - Visuele illustraties bij relevante vragen om begrip te verbeteren
+- Geanimeerde SVG-visualisaties voor betere uitleg van vaarregels en navigatie
 - Timer die de 45 minuten examenduur simuleert
 - Automatisch opslaan van voortgang (je kunt de quiz later hervatten)
 - Voortgangsindicator om te zien hoeveel vragen al beantwoord zijn
@@ -20,7 +21,7 @@ Deze applicatie is gebouwd met:
 - [Next.js 15](https://nextjs.org/) - React framework
 - [TypeScript](https://www.typescriptlang.org/) - Statisch getypeerde JavaScript
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- SVG illustraties voor verbeterde visuele uitleg
+- Interactieve SVG-animaties voor dynamische visualisaties
 - LocalStorage API voor het bewaren van voortgang
 
 ## Lokaal starten
@@ -76,6 +77,34 @@ De app ondersteunt afbeeldingen bij vragen om het leren te bevorderen. Om nieuwe
 }
 ```
 
+## Animaties gebruiken
+
+De app ondersteunt SVG-animaties om complexe vaarsituaties beter te visualiseren:
+
+1. Maak een SVG-bestand met specifieke CSS klassen voor animatie:
+   - Gebruik `class="vessel"` of `class="ship"` voor scheepsbewegingen
+   - Gebruik `class="signal"` of `class="light"` voor knipperende signalen
+   - Gebruik `class="water"` of `class="wave"` voor wateranimaties
+
+2. Plaats het SVG-bestand in de `public/images` map
+
+3. Voeg het toe aan een vraag zoals je met andere afbeeldingen zou doen
+
+De animaties worden automatisch gedetecteerd en toegepast op basis van het bestandstype en de inhoud. Gebruikers kunnen animaties pauzeren en hervatten met de knop in de hoek van de afbeelding.
+
+```typescript
+// Voorbeeld van een animatie in een vraag
+{
+  // andere vraag-eigenschappen
+  image: {
+    src: "/images/animated-vessel-crossing.svg",
+    alt: "Animatie van twee schepen die elkaar kruisen",
+    width: 500,
+    height: 400
+  }
+}
+```
+
 ## Deployen naar Vercel
 
 De eenvoudigste manier om deze app te deployen is met [Vercel](https://vercel.com), het platform van de makers van Next.js.
@@ -91,10 +120,10 @@ Ideeën voor uitbreidingen:
 
 - ✅ Afbeeldingen toevoegen bij relevante vragen
 - ✅ Voortgang opslaan (met localStorage)
+- ✅ Animaties toevoegen voor betere visualisaties
 - Meerdere examens toevoegen
 - Optie voor Klein Vaarbewijs 2 vragen
 - Examenmode vs. oefenmode
-- Animaties toevoegen voor betere visualisaties
 
 ## Licentie
 
