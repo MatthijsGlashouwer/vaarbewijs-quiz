@@ -2,6 +2,8 @@
 
 import { Option, Question as QuestionType } from '../data/questions';
 import { useState } from 'react';
+import Image from 'next/image';
+import FallbackImage from './FallbackImage';
 
 interface QuestionProps {
   question: QuestionType;
@@ -12,6 +14,7 @@ interface QuestionProps {
 
 export default function Question({ question, onAnswer, userAnswer, showExplanation }: QuestionProps) {
   const [selectedOption, setSelectedOption] = useState<string | undefined>(userAnswer);
+  const [imageError, setImageError] = useState(false);
   
   const handleOptionSelect = (optionId: string) => {
     setSelectedOption(optionId);
@@ -23,6 +26,28 @@ export default function Question({ question, onAnswer, userAnswer, showExplanati
   return (
     <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
       <h3 className="text-lg font-semibold mb-4">{question.id}. {question.text}</h3>
+      
+      <div className="mb-6 flex justify-center">
+        {question.image && !imageError ? (
+          <div className="relative rounded-lg overflow-hidden shadow-md">
+            <Image
+              src={question.image.src}
+              alt={question.image.alt}
+              width={question.image.width || 400}
+              height={question.image.height || 300}
+              className="object-cover"
+              onError={() => setImageError(true)}
+            />
+          </div>
+        ) : question.image ? (
+          <FallbackImage 
+            category={question.category}
+            alt={question.image.alt}
+            width={question.image.width}
+            height={question.image.height}
+          />
+        ) : null}
+      </div>
       
       <div className="space-y-3">
         {question.options.map((option: Option) => (

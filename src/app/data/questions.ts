@@ -10,6 +10,12 @@ export interface Question {
   correctOptionId: string;
   explanation: string;
   category: string;
+  image?: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+  };
 }
 
 export const questions: Question[] = [
@@ -24,7 +30,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "c",
     explanation: "De hoofdvaarweg heeft voorrang - dit is een basisregel in het BPR.",
-    category: "Navigatie en Vaarregels"
+    category: "Navigatie en Vaarregels",
+    image: {
+      src: "/images/hoofdvaarweg.svg",
+      alt: "Kruising van hoofdvaarweg met nevenvaarweg",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 2,
@@ -37,7 +49,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "a",
     explanation: "Doorvaart verboden - een rood licht betekent dat doorvaart verboden is.",
-    category: "Navigatie en Vaarregels"
+    category: "Navigatie en Vaarregels",
+    image: {
+      src: "/images/doorvaart-verboden.svg",
+      alt: "Rood licht bij een brug",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 3,
@@ -76,7 +94,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "b",
     explanation: "Het blauwe bord geeft aan dat het schip aan bakboordwal wil passeren.",
-    category: "Navigatie en Vaarregels"
+    category: "Navigatie en Vaarregels",
+    image: {
+      src: "/images/blauw-bord.svg",
+      alt: "Blauw bord met wit knipperlicht op een schip",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 6,
@@ -232,7 +256,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "a",
     explanation: "Een gele ruit markeert een aanbevolen doorvaartopening.",
-    category: "Scheepvaartverkeer"
+    category: "Scheepvaartverkeer",
+    image: {
+      src: "/images/gele-ruit.svg",
+      alt: "Gele ruit op een brug",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 18,
@@ -245,7 +275,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "b",
     explanation: "Twee groene lichten boven elkaar betekenen doorvaart toegestaan.",
-    category: "Scheepvaartverkeer"
+    category: "Scheepvaartverkeer",
+    image: {
+      src: "/images/groene-lichten.svg",
+      alt: "Twee groene lichten bij een brug",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 19,
@@ -271,7 +307,13 @@ export const questions: Question[] = [
     ],
     correctOptionId: "a",
     explanation: "Rood-wit-rood betekent niet invaren, verboden toegang.",
-    category: "Techniek en Navigatie"
+    category: "Techniek en Navigatie",
+    image: {
+      src: "/images/rood-wit-rood.svg",
+      alt: "Rood-wit-rood bord",
+      width: 400,
+      height: 300
+    }
   },
   {
     id: 21,

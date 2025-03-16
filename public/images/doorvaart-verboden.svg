@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1f2937" />
+  <text x="50%" y="250" font-family="Arial" font-size="18" fill="#fff" text-anchor="middle">Rood licht bij een brug</text>
+  
+  <!-- Bridge structure -->
+  <rect x="100" y="50" width="200" height="50" fill="#64748b" />
+  <rect x="120" y="100" width="160" height="100" fill="#94a3b8" stroke="#475569" stroke-width="2" />
+  
+  <!-- Red light -->
+  <circle cx="200" cy="150" r="25" fill="#ef4444" />
+  <circle cx="200" cy="150" r="15" fill="#b91c1c" />
+  <circle cx="195" cy="145" r="5" fill="#fff" opacity="0.5" />
+</svg> 

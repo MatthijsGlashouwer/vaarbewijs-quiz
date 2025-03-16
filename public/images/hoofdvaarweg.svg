@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#3b82f6" />
+  <text x="50%" y="50%" font-family="Arial" font-size="20" fill="#fff" text-anchor="middle">Kruising van hoofdvaarweg met nevenvaarweg</text>
+  <path d="M50,150 L350,150" stroke="#fff" stroke-width="10" />
+  <path d="M200,80 L200,220" stroke="#fff" stroke-width="5" stroke-dasharray="10,5" />
+  <polygon points="330,140 330,160 350,150" fill="#fff" />
+</svg> 

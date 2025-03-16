@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1f2937" />
+  
+  <!-- Bridge structure -->
+  <rect x="100" y="40" width="200" height="50" fill="#64748b" />
+  <rect x="120" y="90" width="160" height="150" fill="#94a3b8" stroke="#475569" stroke-width="2" />
+  
+  <!-- Green lights -->
+  <circle cx="200" cy="120" r="20" fill="#22c55e" />
+  <circle cx="200" cy="120" r="12" fill="#16a34a" />
+  <circle cx="196" cy="116" r="4" fill="#fff" opacity="0.6" />
+  
+  <circle cx="200" cy="180" r="20" fill="#22c55e" />
+  <circle cx="200" cy="180" r="12" fill="#16a34a" />
+  <circle cx="196" cy="176" r="4" fill="#fff" opacity="0.6" />
+  
+  <text x="50%" y="270" font-family="Arial" font-size="18" fill="#fff" text-anchor="middle">Twee groene lichten bij een brug</text>
+</svg> 
