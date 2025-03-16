@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import { Question as QuestionType } from '../data/questions';
 import Question from './Question';
 import Results from './Results';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { Clock, AlertCircle, ArrowLeft, ArrowRight, Trash2, CheckCircle, ListChecks } from 'lucide-react';
 
 interface QuizProps {
   questions: QuestionType[];
@@ -168,27 +172,31 @@ export default function Quiz({ questions }: QuizProps) {
   // Show the resume prompt if there's saved progress
   if (hasStoredProgress && quizState === 'quiz' && answeredQuestionsCount > 0) {
     return (
-      <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md my-12">
-        <h2 className="text-xl font-bold mb-4">Voortgang gevonden</h2>
-        <p className="mb-4">
-          Je hebt een eerdere quiz-sessie met {answeredQuestionsCount} beantwoorde vragen. 
-          Wil je verdergaan waar je gebleven was?
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button
-            onClick={() => setHasStoredProgress(false)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
-          >
-            Doorgaan
-          </button>
-          <button
+      <Card className="max-w-md mx-auto my-12">
+        <CardHeader>
+          <CardTitle>Voortgang gevonden</CardTitle>
+          <CardDescription>Je kunt verder gaan waar je gebleven was</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4">
+            Je hebt een eerdere quiz-sessie met <strong>{answeredQuestionsCount}</strong> beantwoorde vragen.
+            Wil je verdergaan waar je gebleven was?
+          </p>
+        </CardContent>
+        <CardFooter className="flex flex-col sm:flex-row gap-4 justify-end">
+          <Button
             onClick={restartQuiz}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-2 rounded-md font-medium transition-colors"
+            variant="outline"
           >
             Nieuwe quiz starten
-          </button>
-        </div>
-      </div>
+          </Button>
+          <Button
+            onClick={() => setHasStoredProgress(false)}
+          >
+            Doorgaan
+          </Button>
+        </CardFooter>
+      </Card>
     );
   }
   
@@ -204,105 +212,126 @@ export default function Quiz({ questions }: QuizProps) {
   }
   
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <div className="bg-blue-50 p-4 rounded-lg mb-8 flex flex-col sm:flex-row justify-between items-center">
-        <div>
-          <h2 className="text-xl font-bold">Oefenexamen Klein Vaarbewijs 1</h2>
-          <p className="text-sm text-gray-600">
-            {userAnswers && Object.keys(userAnswers).length} van {questions.length} vragen beantwoord
-          </p>
-        </div>
-        
-        <div className="flex items-center mt-4 sm:mt-0">
-          <div className={`mr-2 text-lg font-medium quiz-timer ${timer < 300 ? 'text-red-600 animate-pulse' : 'text-gray-800'}`}>
-            {formatTime(timer)}
+    <div className="max-w-4xl mx-auto">
+      <Card className="mb-8">
+        <CardHeader className="pb-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <CardTitle>Oefenexamen Klein Vaarbewijs 1</CardTitle>
+              <CardDescription>
+                {userAnswers && Object.keys(userAnswers).length} van {questions.length} vragen beantwoord
+              </CardDescription>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className={cn(
+                "flex items-center font-mono text-lg",
+                timer < 300 && "text-red-500 dark:text-red-400 animate-pulse"
+              )}>
+                <Clock className="mr-2 h-5 w-5" />
+                {formatTime(timer)}
+              </div>
+              
+              {quizState === 'quiz' && (
+                <Button
+                  onClick={submitQuiz}
+                  variant="default"
+                  size="sm"
+                >
+                  <CheckCircle className="mr-2 h-4 w-4" />
+                  Inleveren
+                </Button>
+              )}
+              
+              {quizState === 'review' && (
+                <Button
+                  onClick={() => setQuizState('results')}
+                  variant="default"
+                  size="sm"
+                >
+                  <ListChecks className="mr-2 h-4 w-4" />
+                  Terug naar resultaten
+                </Button>
+              )}
+            </div>
           </div>
-          {quizState === 'quiz' && (
-            <button
-              onClick={submitQuiz}
-              className="ml-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium"
-            >
-              Inleveren
-            </button>
-          )}
-          {quizState === 'review' && (
-            <button
-              onClick={() => setQuizState('results')}
-              className="ml-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded font-medium"
-            >
-              Terug naar resultaten
-            </button>
-          )}
+        </CardHeader>
+        
+        <div className="px-6">
+          <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full bg-primary rounded-full transition-all duration-300 ease-in-out"
+              style={{ width: `${progressPercentage}%` }}
+            />
+          </div>
         </div>
-      </div>
-      
-      <div className="mb-6 bg-gray-200 rounded-full h-2.5">
-        <div
-          className="bg-blue-500 h-2.5 rounded-full"
-          style={{ width: `${progressPercentage}%` }}
-        ></div>
-      </div>
-      
-      <Question
-        question={currentQuestion}
-        onAnswer={handleAnswer}
-        userAnswer={userAnswers[currentQuestion.id]}
-        showExplanation={quizState === 'review'}
-      />
-      
-      <div className="flex justify-between">
-        <button
-          onClick={prevQuestion}
-          disabled={isFirstQuestion}
-          className={`px-6 py-2 rounded-md font-medium ${
-            isFirstQuestion
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
-          }`}
-        >
-          Vorige
-        </button>
+
+        <CardContent className="pt-6">
+          <Question
+            question={currentQuestion}
+            onAnswer={handleAnswer}
+            userAnswer={userAnswers[currentQuestion.id]}
+            showExplanation={quizState === 'review'}
+          />
+        </CardContent>
         
-        <button
-          onClick={clearProgress}
-          className="px-6 py-2 rounded-md font-medium text-red-600 hover:bg-red-50 border border-red-200"
-        >
-          Voortgang wissen
-        </button>
-        
-        <button
-          onClick={nextQuestion}
-          disabled={isLastQuestion}
-          className={`px-6 py-2 rounded-md font-medium ${
-            isLastQuestion
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
-          }`}
-        >
-          Volgende
-        </button>
-      </div>
-      
-      <div className="mt-8 grid grid-cols-5 sm:grid-cols-10 gap-2">
-        {questions.map((question, index) => (
-          <button
-            key={question.id}
-            onClick={() => setCurrentQuestionIndex(index)}
-            className={`w-full aspect-square rounded-md flex items-center justify-center font-medium ${
-              index === currentQuestionIndex
-                ? 'bg-blue-500 text-white'
-                : userAnswers[question.id]
-                  ? userAnswers[question.id] === question.correctOptionId && quizState === 'review'
-                    ? 'bg-green-100 text-green-800'
-                    : userAnswers[question.id] !== question.correctOptionId && quizState === 'review'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-blue-100 text-blue-800'
-                  : 'bg-gray-100 text-gray-800'
-            }`}
+        <CardFooter className="flex justify-between">
+          <Button
+            onClick={prevQuestion}
+            disabled={isFirstQuestion}
+            variant="outline"
+            className={isFirstQuestion ? "opacity-50" : ""}
           >
-            {question.id}
-          </button>
-        ))}
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Vorige
+          </Button>
+          
+          <Button
+            onClick={clearProgress}
+            variant="ghost"
+            className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/20"
+          >
+            <Trash2 className="mr-2 h-4 w-4" />
+            Voortgang wissen
+          </Button>
+          
+          <Button
+            onClick={nextQuestion}
+            disabled={isLastQuestion}
+            variant={isLastQuestion ? "outline" : "default"}
+            className={isLastQuestion ? "opacity-50" : ""}
+          >
+            Volgende
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </CardFooter>
+      </Card>
+      
+      <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 gap-2 mb-8">
+        {questions.map((question, index) => {
+          const isAnswered = !!userAnswers[question.id];
+          const isCurrentQuestion = index === currentQuestionIndex;
+          const isCorrect = userAnswers[question.id] === question.correctOptionId && quizState === 'review';
+          const isIncorrect = userAnswers[question.id] !== question.correctOptionId && isAnswered && quizState === 'review';
+          
+          return (
+            <Button
+              key={question.id}
+              onClick={() => setCurrentQuestionIndex(index)}
+              variant={isCurrentQuestion ? "default" : "outline"}
+              size="icon"
+              className={cn(
+                "aspect-square text-base font-medium transition-all h-10 w-10 p-0",
+                isCurrentQuestion && "ring-2 ring-primary ring-offset-2",
+                isAnswered && !isCurrentQuestion && !isCorrect && !isIncorrect && "bg-primary/10 text-primary hover:bg-primary/20",
+                isCorrect && "bg-green-100 text-green-800 border-green-400 hover:bg-green-200 dark:bg-green-950/40 dark:text-green-400",
+                isIncorrect && "bg-red-100 text-red-800 border-red-400 hover:bg-red-200 dark:bg-red-950/40 dark:text-red-400"
+              )}
+            >
+              {question.id}
+            </Button>
+          );
+        })}
       </div>
     </div>
   );

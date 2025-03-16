@@ -5,6 +5,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import FallbackImage from './FallbackImage';
 import AnimatedImage from './AnimatedImage';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 // Import the AnimationConfig type from AnimatedImage
 type AnimationType = 'vessel-movement' | 'signal-flash' | 'water-flow' | 'path-trace' | 'none';
@@ -56,81 +61,126 @@ export default function Question({ question, onAnswer, userAnswer, showExplanati
   const useAnimatedImage = question.image && question.image.src.endsWith('.svg');
 
   return (
-    <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
-      <h3 className="text-lg font-semibold mb-4">{question.id}. {question.text}</h3>
+    <Card className="mb-8 shadow-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-xl">
+          <span className="flex items-center justify-center rounded-full bg-primary/10 text-primary h-8 w-8 shrink-0">{question.id}</span>
+          {question.text}
+        </CardTitle>
+        <CardDescription>{question.category}</CardDescription>
+      </CardHeader>
       
-      <div className="mb-6 flex justify-center">
-        {question.image && useAnimatedImage ? (
-          <AnimatedImage
-            src={question.image.src}
-            alt={question.image.alt}
-            width={question.image.width || 400}
-            height={question.image.height || 300}
-            animation={getAnimationConfig(question.image.src)}
-            category={question.category}
-          />
-        ) : question.image && !imageError ? (
-          <div className="relative rounded-lg overflow-hidden shadow-md">
-            <Image
-              src={question.image.src}
-              alt={question.image.alt}
-              width={question.image.width || 400}
-              height={question.image.height || 300}
-              className="object-cover"
-              onError={() => setImageError(true)}
-            />
-          </div>
-        ) : question.image ? (
-          <FallbackImage 
-            category={question.category}
-            alt={question.image.alt}
-            width={question.image.width}
-            height={question.image.height}
-          />
-        ) : null}
-      </div>
-      
-      <div className="space-y-3">
-        {question.options.map((option: Option) => (
-          <div 
-            key={option.id}
-            className={`p-3 rounded-md cursor-pointer border ${
-              selectedOption === option.id 
-                ? selectedOption === question.correctOptionId && showExplanation
-                  ? 'bg-green-100 border-green-400'
-                  : selectedOption !== question.correctOptionId && showExplanation
-                    ? 'bg-red-100 border-red-400'
-                    : 'bg-blue-100 border-blue-400'
-                : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
-            } transition-colors`}
-            onClick={() => !showExplanation && handleOptionSelect(option.id)}
-          >
-            <div className="flex items-center">
-              <div className={`w-6 h-6 flex items-center justify-center rounded-full mr-3 ${
-                selectedOption === option.id ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}>
-                {option.id}
+      {question.image && (
+        <CardContent className="flex justify-center pb-2">
+          <div className="overflow-hidden rounded-xl border bg-muted/20">
+            {useAnimatedImage ? (
+              <AnimatedImage
+                src={question.image.src}
+                alt={question.image.alt}
+                width={question.image.width || 500}
+                height={question.image.height || 375}
+                animation={getAnimationConfig(question.image.src)}
+                category={question.category}
+              />
+            ) : !imageError ? (
+              <div className="relative">
+                <Image
+                  src={question.image.src}
+                  alt={question.image.alt}
+                  width={question.image.width || 500}
+                  height={question.image.height || 375}
+                  className="object-cover"
+                  onError={() => setImageError(true)}
+                />
               </div>
-              <span>{option.text}</span>
-              
-              {showExplanation && option.id === question.correctOptionId && (
-                <div className="ml-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-              )}
-            </div>
+            ) : (
+              <FallbackImage 
+                category={question.category}
+                alt={question.image.alt}
+                width={question.image.width}
+                height={question.image.height}
+              />
+            )}
           </div>
-        ))}
-      </div>
+        </CardContent>
+      )}
+      
+      <CardContent>
+        <RadioGroup
+          value={selectedOption}
+          onValueChange={!showExplanation ? handleOptionSelect : undefined}
+          className="space-y-3"
+        >
+          {question.options.map((option: Option) => {
+            const isSelected = selectedOption === option.id;
+            const isCorrectOption = option.id === question.correctOptionId;
+            const isIncorrectSelection = isSelected && !isCorrectOption && showExplanation;
+            const isCorrectSelection = isSelected && isCorrectOption && showExplanation;
+            
+            return (
+              <div
+                key={option.id}
+                className={cn(
+                  "flex items-start space-x-2 rounded-md border p-3 transition-colors",
+                  isSelected && !showExplanation && "border-primary bg-primary/5",
+                  isCorrectSelection && "border-green-500 bg-green-50 dark:bg-green-950/20",
+                  isIncorrectSelection && "border-red-500 bg-red-50 dark:bg-red-950/20",
+                  !isSelected && showExplanation && isCorrectOption && "border-green-500 bg-green-50/50 dark:bg-green-950/10",
+                  !showExplanation && "cursor-pointer hover:bg-muted/60"
+                )}
+              >
+                <RadioGroupItem
+                  value={option.id}
+                  id={`option-${question.id}-${option.id}`}
+                  disabled={showExplanation}
+                  className="mt-1"
+                />
+                <div className="flex-1">
+                  <Label
+                    htmlFor={`option-${question.id}-${option.id}`}
+                    className={cn(
+                      "text-base font-medium cursor-pointer",
+                      isCorrectSelection && "text-green-700 dark:text-green-300",
+                      isIncorrectSelection && "text-red-700 dark:text-red-300"
+                    )}
+                  >
+                    <div className="flex items-start">
+                      <span className="flex items-center justify-center rounded-full border h-6 w-6 mr-2 shrink-0">
+                        {option.id}
+                      </span>
+                      <span className="pt-0.5">{option.text}</span>
+                      
+                      {showExplanation && isCorrectOption && (
+                        <CheckCircle className="ml-auto h-5 w-5 text-green-500 shrink-0" />
+                      )}
+                      
+                      {showExplanation && isIncorrectSelection && (
+                        <XCircle className="ml-auto h-5 w-5 text-red-500 shrink-0" />
+                      )}
+                    </div>
+                  </Label>
+                </div>
+              </div>
+            );
+          })}
+        </RadioGroup>
+      </CardContent>
       
       {showExplanation && (
-        <div className={`mt-4 p-4 rounded-md ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
-          <p className="font-medium mb-1">{isCorrect ? 'Correct!' : 'Incorrect'}</p>
-          <p>{question.explanation}</p>
-        </div>
+        <CardFooter>
+          <div className={cn(
+            "w-full p-4 rounded-md text-sm",
+            isCorrect 
+              ? "bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900"
+              : "bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900"
+          )}>
+            <p className="font-medium mb-1">
+              {isCorrect ? 'Correct antwoord!' : 'Helaas, dat is niet correct.'}
+            </p>
+            <p>{question.explanation}</p>
+          </div>
+        </CardFooter>
       )}
-    </div>
+    </Card>
   );
 } 
