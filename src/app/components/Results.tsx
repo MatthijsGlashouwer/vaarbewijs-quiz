@@ -11,7 +11,6 @@ interface ResultsProps {
 
 export default function Results({ questions, userAnswers, onRestart, onReview }: ResultsProps) {
   const totalQuestions = questions.length;
-  const answeredQuestions = Object.keys(userAnswers).length;
   
   const correctAnswers = questions.filter(
     (question) => userAnswers[question.id] === question.correctOptionId

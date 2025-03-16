@@ -19,7 +19,6 @@ export default function Question({ question, onAnswer, userAnswer, showExplanati
   };
 
   const isCorrect = userAnswer === question.correctOptionId;
-  const isAnswered = userAnswer !== undefined;
 
   return (
     <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
