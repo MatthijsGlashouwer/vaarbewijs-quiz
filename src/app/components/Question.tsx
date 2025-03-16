@@ -17,7 +17,7 @@ interface AnimationConfig {
 }
 
 // Define animation mappings based on image content
-const getAnimationConfig = (src: string, _category: string): AnimationConfig => {
+const getAnimationConfig = (src: string): AnimationConfig => {
   if (src.includes('blauw-bord')) {
     return { type: 'signal-flash', duration: 1.5, loop: true };
   } else if (src.includes('hoofdvaarweg')) {
@@ -66,7 +66,7 @@ export default function Question({ question, onAnswer, userAnswer, showExplanati
             alt={question.image.alt}
             width={question.image.width || 400}
             height={question.image.height || 300}
-            animation={getAnimationConfig(question.image.src, question.category)}
+            animation={getAnimationConfig(question.image.src)}
             category={question.category}
           />
         ) : question.image && !imageError ? (
