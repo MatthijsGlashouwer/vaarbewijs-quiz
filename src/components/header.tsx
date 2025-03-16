@@ -1,7 +1,6 @@
 'use client';
 
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
 import { GanttChart } from 'lucide-react';
 import Link from 'next/link';
 
