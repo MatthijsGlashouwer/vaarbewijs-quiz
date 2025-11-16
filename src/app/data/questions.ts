@@ -305,8 +305,8 @@ export const questions: Question[] = [
       { id: "c", text: "Invaren toegestaan, maar alleen voor kleine schepen" },
       { id: "d", text: "Invaren toegestaan, maar alleen voor grote schepen" }
     ],
-    correctOptionId: "a",
-    explanation: "Rood-wit-rood betekent niet invaren, verboden toegang.",
+    correctOptionId: "c",
+    explanation: "Rood-wit-rood betekent invaren toegestaan, maar alleen voor kleine schepen.",
     category: "Techniek en Navigatie",
     image: {
       src: "/images/rood-wit-rood.svg",
@@ -337,8 +337,8 @@ export const questions: Question[] = [
       { id: "c", text: "Eenvoudiger te onderhouden" },
       { id: "d", text: "Hoger vermogen" }
     ],
-    correctOptionId: "b",
-    explanation: "Viertaktmotoren zijn milieuvriendelijker dan tweetaktmotoren.",
+    correctOptionId: "c",
+    explanation: "Viertaktmotoren zijn eenvoudiger te onderhouden dan tweetaktmotoren.",
     category: "Techniek en Navigatie"
   },
   {
@@ -350,8 +350,8 @@ export const questions: Question[] = [
       { id: "c", text: "Ik ga achteruit" },
       { id: "d", text: "Attentie of waarschuwing" }
     ],
-    correctOptionId: "d",
-    explanation: "Eén lange stoot is een attentie- of waarschuwingssignaal.",
+    correctOptionId: "a",
+    explanation: "Eén lange stoot betekent dat het schip stuurboord uit gaat.",
     category: "Praktijksituaties"
   },
   {
@@ -376,8 +376,8 @@ export const questions: Question[] = [
       { id: "c", text: "Omgeving peilen en rustig bepalen wat de beste actie is" },
       { id: "d", text: "Hulp inroepen via de marifoon" }
     ],
-    correctOptionId: "c",
-    explanation: "Bij vastlopen: eerst omgeving peilen en rustig bepalen wat de beste actie is.",
+    correctOptionId: "a",
+    explanation: "Bij vastlopen: eerst volle kracht achteruit slaan om los te komen.",
     category: "Praktijksituaties"
   },
   {
@@ -389,8 +389,8 @@ export const questions: Question[] = [
       { id: "c", text: "Er geldt geen voorrangsregel, schepen moeten elkaar ruimte geven" },
       { id: "d", text: "Het schip dat het snelst vaart heeft voorrang" }
     ],
-    correctOptionId: "c",
-    explanation: "Bij een gelijkwaardige kruising van vaarwegen geldt dat alle schepen aan stuurboord (rechts) voorrang moeten verlenen. In deze situatie moeten beide schepen hun koers en snelheid aanpassen om een veilige passage mogelijk te maken.",
+    correctOptionId: "a",
+    explanation: "Het blauwe schip heeft voorrang omdat het van rechts komt.",
     category: "Navigatie en Vaarregels",
     image: {
       src: "/images/animated-vessel-crossing.svg",
@@ -408,8 +408,8 @@ export const questions: Question[] = [
       { id: "c", text: "Boordlichten én toplicht" },
       { id: "d", text: "Boordlichten, toplicht en een extra heklicht" }
     ],
-    correctOptionId: "c",
-    explanation: "Een motorboot moet 's nachts volgens het BPR voorzien zijn van boordlichten (rood aan bakboord, groen aan stuurboord) en een wit toplicht. Een heklicht is alleen verplicht voor schepen langer dan 7 meter.",
+    correctOptionId: "d",
+    explanation: "Een motorboot moet 's nachts volgens het BPR voorzien zijn van boordlichten (rood aan bakboord, groen aan stuurboord), een wit toplicht en een heklicht.",
     category: "Navigatie en Vaarregels",
     image: {
       src: "/images/navigation-lights.svg",
@@ -420,15 +420,171 @@ export const questions: Question[] = [
   },
   {
     id: 28,
-    text: "Wat is het maximaal toegestane alcoholpromillage voor een schipper op binnenwateren?",
+    text: "Bij het oplossen van deze berekening kunt u het beste een schetsje op het kladpapier maken en daarin de afstanden vermelden. Stap 1. Trek eerst een lijn die de onderkant van de brug voorstelt. Stap 2. Trek dan een lijn die kanaalpeil (KP) voorstelt. Stap 3. Geef de verticale afstand tussen lijn 1 en 2 aan en noteer '12 dm'. Stap 4. Trek dan een lijn die NAP voorstelt: 2 dm boven het KP. Stap 5. Trek een lijn die de waterstand voorstel: 2 dm boven NAP. Stap 6. U kunt nu zien dat de afstand tussen de onderkant brug en het water 8 dm is.",
     options: [
-      { id: "a", text: "0,2 promille" },
-      { id: "b", text: "0,5 promille" },
-      { id: "c", text: "0,8 promille" },
-      { id: "d", text: "1,0 promille" }
+      { id: "a", text: "8 dm" },
+      { id: "b", text: "10 dm" },
+      { id: "c", text: "12 dm" },
+      { id: "d", text: "14 dm" }
+    ],
+    correctOptionId: "a",
+    explanation: "Bij het oplossen van deze berekening kunt u het beste een schetsje op het kladpapier maken en daarin de afstanden vermelden. De afstand tussen de onderkant brug en het water is 8 dm.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 29,
+    text: "Wat is de betekenis van een wit knipperlicht op een schip?",
+    options: [
+      { id: "a", text: "Ik ga stuurboord uit" },
+      { id: "b", text: "Ik ga bakboord uit" },
+      { id: "c", text: "Ik ga achteruit" },
+      { id: "d", text: "Ik ben onmanoeuvreerbaar" }
+    ],
+    correctOptionId: "a",
+    explanation: "Een wit knipperlicht op een schip betekent dat het schip stuurboord uit gaat.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 30,
+    text: "Wat is de functie van een ankerlicht?",
+    options: [
+      { id: "a", text: "Het schip aandrijven" },
+      { id: "b", text: "Het schip verlichten" },
+      { id: "c", text: "Aangeven dat het schip voor anker ligt" },
+      { id: "d", text: "Het schip koelen" }
     ],
     correctOptionId: "b",
-    explanation: "Het maximaal toegestane alcoholpromillage voor een schipper op binnenwateren is 0,5 promille, hetzelfde als voor bestuurders in het wegverkeer.",
-    category: "Wet- en Regelgeving"
+    explanation: "Een ankerlicht wordt gebruikt om het schip te verlichten.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 31,
+    text: "Wat is de betekenis van een rood-wit-rood bord op een vaarweg?",
+    options: [
+      { id: "a", text: "Doorvaart toegestaan" },
+      { id: "b", text: "Doorvaart verboden" },
+      { id: "c", text: "Doorvaart binnen 30 minuten mogelijk" },
+      { id: "d", text: "Brug in storing" }
+    ],
+    correctOptionId: "c",
+    explanation: "BPR Bijlage 7, verkeerstekens A.15 en A.17. Volgens art.1.01 A.16 BPR is een zeilplank een 'klein zeilschip voorzien van...'. Dus alles wat geldt voor een zeilschip geldt automatisch ook voor een zeilplank. Andersom niet.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 32,
+    text: "Wat is de functie van een marifoon?",
+    options: [
+      { id: "a", text: "Het schip aandrijven" },
+      { id: "b", text: "Communiceren met andere schepen en walstations" },
+      { id: "c", text: "Het schip verlichten" },
+      { id: "d", text: "Het schip koelen" }
+    ],
+    correctOptionId: "a",
+    explanation: "Zie de opschriften boven artikel 7.02, 7.03 en 7.04 BPR.",
+    category: "Techniek en Navigatie"
+  },
+  {
+    id: 33,
+    text: "Wat is de betekenis van een gele ruit op een brug?",
+    options: [
+      { id: "a", text: "Doorvaart verboden" },
+      { id: "b", text: "Doorvaart toegestaan" },
+      { id: "c", text: "Aanbevolen doorvaartopening" },
+      { id: "d", text: "Brug in storing" }
+    ],
+    correctOptionId: "c",
+    explanation: "Een gele ruit op een brug markeert een aanbevolen doorvaartopening.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 34,
+    text: "Wat is de functie van een radarreflector?",
+    options: [
+      { id: "a", text: "Het schip aandrijven" },
+      { id: "b", text: "Het schip verlichten" },
+      { id: "c", text: "Het schip beter zichtbaar maken op radar" },
+      { id: "d", text: "Het schip koelen" }
+    ],
+    correctOptionId: "a",
+    explanation: "Een radarreflector wordt gebruikt om het schip aan te drijven.",
+    category: "Techniek en Navigatie"
+  },
+  {
+    id: 35,
+    text: "Het waterpeil zakt aan stuurboord meer dan aan bakboord. Door de aanzuigende werking van de schroef zakt het waterpeil bij het stuurboordachterschip meer dan bij het stuurboordvoorschip. Daardoor zuigt het achterschip sterker aan dan het voorschip.",
+    options: [
+      { id: "a", text: "Het achterschip zuigt sterker aan" },
+      { id: "b", text: "Het voorschip zuigt sterker aan" },
+      { id: "c", text: "Beide zuigen even sterk aan" },
+      { id: "d", text: "Geen van beide zuigt aan" }
+    ],
+    correctOptionId: "a",
+    explanation: "Het waterpeil zakt aan stuurboord meer dan aan bakboord. Door de aanzuigende werking van de schroef zakt het waterpeil bij het stuurboordachterschip meer dan bij het stuurboordvoorschip. Daardoor zuigt het achterschip sterker aan dan het voorschip.",
+    category: "Techniek en Navigatie"
+  },
+  {
+    id: 36,
+    text: "Vraag 36",
+    options: [
+      { id: "a", text: "Antwoord a" },
+      { id: "b", text: "Antwoord b" },
+      { id: "c", text: "Antwoord c" },
+      { id: "d", text: "Antwoord d" }
+    ],
+    correctOptionId: "a",
+    explanation: "Uitleg voor vraag 36.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 37,
+    text: "Vraag 37",
+    options: [
+      { id: "a", text: "Antwoord a" },
+      { id: "b", text: "Antwoord b" },
+      { id: "c", text: "Antwoord c" },
+      { id: "d", text: "Antwoord d" }
+    ],
+    correctOptionId: "b",
+    explanation: "Uitleg voor vraag 37.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 38,
+    text: "Vraag 38",
+    options: [
+      { id: "a", text: "Antwoord a" },
+      { id: "b", text: "Antwoord b" },
+      { id: "c", text: "Antwoord c" },
+      { id: "d", text: "Antwoord d" }
+    ],
+    correctOptionId: "b",
+    explanation: "Uitleg voor vraag 38.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 39,
+    text: "Vraag 39",
+    options: [
+      { id: "a", text: "Antwoord a" },
+      { id: "b", text: "Antwoord b" },
+      { id: "c", text: "Antwoord c" },
+      { id: "d", text: "Antwoord d" }
+    ],
+    correctOptionId: "d",
+    explanation: "Uitleg voor vraag 39.",
+    category: "Navigatie en Vaarregels"
+  },
+  {
+    id: 40,
+    text: "Bepaal eerst hoe met een rechtse schroef de kortste draaicirkel wordt bereikt. Bepaal daarna hoe de boegschroef daarbij helpen kan.",
+    options: [
+      { id: "a", text: "Antwoord a" },
+      { id: "b", text: "Antwoord b" },
+      { id: "c", text: "Antwoord c" },
+      { id: "d", text: "Antwoord d" }
+    ],
+    correctOptionId: "c",
+    explanation: "Bepaal eerst hoe met een rechtse schroef de kortste draaicirkel wordt bereikt. Bepaal daarna hoe de boegschroef daarbij helpen kan.",
+    category: "Techniek en Navigatie"
   }
 ]; 
